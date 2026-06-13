@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+/* ============================================
+   GLOBAL VARIABLES & RESET
+   ============================================ */
+:root {
+  --red-dark:    #8B2A2A;
+  --red-mid:     #A83232;
+  --red-bg:      #C4514A;
+  --pink-bg:     #D98A87;
+  --pink-light:  #EDB8B5;
+  --cream:       #FEF3E2;
+  --gold:        #E8B84B;
+  --gold-light:  #F5D07A;
+  --white:       #FFFDF9;
+  --dark:        #1A0A0A;
+  --text-light:  #F5E6D8;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-mono);
+  background: var(--red-bg);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   PAGE TRANSITION
+   ============================================ */
+body {
+  animation: pageIn 0.5s var(--ease-smooth) both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.fade-out {
+  animation: pageOut 0.5s var(--ease-smooth) forwards !important;
+}
+
+@keyframes pageOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(1.02); }
+}
+
+/* ============================================
+   SHAKE UTILITY
+   ============================================ */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-8px); }
+  30%       { transform: translateX(8px); }
+  45%       { transform: translateX(-6px); }
+  60%       { transform: translateX(6px); }
+  75%       { transform: translateX(-3px); }
+  90%       { transform: translateX(3px); }
+}
+
+.shake {
+  animation: shake 0.55s var(--ease-smooth) both;
+}

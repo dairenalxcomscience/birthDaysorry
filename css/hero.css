@@ -1,0 +1,188 @@
+/* ============================================
+   HERO SECTION  —  hero.css
+   ============================================ */
+
+.hero-page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+/* ============================================
+   BACKGROUND PHOTO
+   ============================================ */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Placeholder kalau belum ada foto */
+.hero-bg-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #8B2A2A 0%, #C4514A 50%, #D98A87 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  opacity: 0.4;
+}
+
+/* Gradient overlay bawah (biar teks kebaca) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 5, 5, 0.85) 0%,
+    rgba(20, 5, 5, 0.4) 40%,
+    rgba(20, 5, 5, 0.1) 70%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* ============================================
+   COUNTER (kecil di kanan atas)
+   ============================================ */
+.hero-counter {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  z-index: 3;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  animation: fadeInDown 0.8s var(--ease-smooth) 0.5s both;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   MAIN CONTENT (bawah kiri)
+   ============================================ */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px 56px;
+  max-width: 600px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: slideUp 0.7s var(--ease-bounce) 0.3s forwards;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: slideUp 0.7s var(--ease-bounce) 0.45s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 32px;
+  max-width: 420px;
+  opacity: 0;
+  animation: slideUp 0.7s var(--ease-smooth) 0.6s forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   CTA BUTTON
+   ============================================ */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background   0.25s ease,
+    border-color 0.25s ease,
+    transform    0.15s var(--ease-bounce);
+  opacity: 0;
+  animation: slideUp 0.7s var(--ease-smooth) 0.75s forwards;
+  text-decoration: none;
+}
+
+.hero-cta:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.8);
+  transform: translateY(-2px);
+}
+
+.hero-cta:active {
+  transform: scale(0.97);
+}
+
+.hero-cta-arrow {
+  transition: transform 0.2s ease;
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 600px) {
+  .hero-content {
+    padding: 0 28px 48px;
+  }
+
+  .hero-counter {
+    top: 20px;
+    right: 20px;
+  }
+}

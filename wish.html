@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make a Wish ✨</title>
+  <script src="js/guard.js"></script>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/wish.css" />
+</head>
+<body>
+
+<main class="wish-page" id="wishPage">
+
+  <!-- ✏️ Judul -->
+  <p class="wish-title" id="wishTitle">✨ Make a Wish ✨</p>
+
+  <!-- Pixel art cake (digambar via canvas JS) -->
+  <div class="pixel-cake-wrap">
+    <div class="candle-glow" id="candleGlow"></div>
+    <canvas id="cakeCanvas" width="22" height="21"></canvas>
+  </div>
+
+  <!-- Tombol tiup lilin -->
+  <button class="blow-btn" id="blowBtn" onclick="blowCandles()">
+    🌬 Tiup lilin
+  </button>
+
+  <!-- Musik toggle -->
+  <div class="music-pill" id="musicPill" onclick="toggleMusic()">
+    <span class="music-icon" id="musicIcon">🎵</span>
+    <span id="musicLabel">Happy Birthday to You</span>
+  </div>
+
+</main>
+
+<!-- Overlay setelah tiup lilin -->
+<div class="wish-sent" id="wishSent">
+  <p class="wish-sent-title">🎉 Happy Birthday Sayanggg</p>
+  <p class="wish-sent-sub">AMINNNN ❤ 🌟</p>
+  <a class="wish-next-btn" href="letter.html">Baca suratmu →</a>
+</div>
+
+<!--
+  ✏️ AUDIO:
+  Taruh file happy-birthday.mp3 di assets/audio/
+  Format: MP3, bitrate 128kbps, durasi ~20 detik (loop)
+-->
+<audio id="bgMusic" loop preload="auto">
+  <source src="assets/audio/happy-birthday.mp3" type="audio/mpeg" />
+</audio>
+
+<script src="js/wish.js"></script>
+</body>
+</html>

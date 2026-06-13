@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Surprise 🎂</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/lock.css" />
+</head>
+<body>
+
+<main class="lock-page">
+
+  <!-- ======= KIRI: POLAROID ======= -->
+  <div class="polaroid-wrap">
+    <span class="ribbon">🎀</span>
+
+    <div class="polaroid">
+      <!--
+        CARA PAKAI:
+        Ganti <div class="polaroid-photo-placeholder"> dengan:
+        <img class="polaroid-photo" src="assets/photos/couple.webp" alt="foto" />
+      -->
+      <div class="polaroid-photo-placeholder">📷</div>
+
+      <!-- ✏️ Ganti teks caption di bawah ini -->
+      <span class="polaroid-caption">Happy Birthday, Sayanggggg</span>
+    </div>
+  </div>
+
+  <!-- ======= KANAN: PIN PAD ======= -->
+  <div class="pin-section">
+
+    <span class="pin-label">Enter a Passcode</span>
+
+    <!-- 6 dot indicator -->
+    <div class="pin-display" id="pinDisplay">
+      <span class="pin-dot" data-index="0"></span>
+      <span class="pin-dot" data-index="1"></span>
+      <span class="pin-dot" data-index="2"></span>
+      <span class="pin-dot" data-index="3"></span>
+      <span class="pin-dot" data-index="4"></span>
+      <span class="pin-dot" data-index="5"></span>
+    </div>
+
+    <!-- Error text -->
+    <div class="pin-error" id="pinError">Wrong passcode. Try again.</div>
+
+    <!-- Keypad 3x4 -->
+    <div class="keypad">
+      <button class="key-btn" onclick="pressKey('1')">1</button>
+      <button class="key-btn" onclick="pressKey('2')">2</button>
+      <button class="key-btn" onclick="pressKey('3')">3</button>
+      <button class="key-btn" onclick="pressKey('4')">4</button>
+      <button class="key-btn" onclick="pressKey('5')">5</button>
+      <button class="key-btn" onclick="pressKey('6')">6</button>
+      <button class="key-btn" onclick="pressKey('7')">7</button>
+      <button class="key-btn" onclick="pressKey('8')">8</button>
+      <button class="key-btn" onclick="pressKey('9')">9</button>
+      <button class="key-btn empty" aria-hidden="true"></button>
+      <button class="key-btn" onclick="pressKey('0')">0</button>
+      <button class="key-btn delete" onclick="deleteKey()" aria-label="Delete">⌫</button>
+    </div>
+
+    <!-- ✏️ Ganti hint sesuai clue yang mau dikasih -->
+    <p class="pin-hint">hint: Tanggal Lahir </p>
+
+  </div>
+
+</main>
+
+<script src="js/lock.js"></script>
+</body>
+</html>

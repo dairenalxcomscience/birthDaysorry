@@ -1,0 +1,268 @@
+/* ============================================
+   LOCK SCREEN  —  lock.css
+   ============================================ */
+
+.lock-page {
+  width: 100vw;
+  height: 100vh;
+  background: var(--red-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle noise texture overlay */
+.lock-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   POLAROID PHOTO
+   ============================================ */
+.polaroid-wrap {
+  position: relative;
+  z-index: 1;
+  animation: polaroidFloat 0.7s var(--ease-bounce) both;
+  animation-delay: 0.1s;
+}
+
+@keyframes polaroidFloat {
+  from { opacity: 0; transform: translateY(30px) rotate(-3deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(-3deg); }
+}
+
+.polaroid {
+  background: var(--white);
+  padding: 12px 12px 40px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    0 2px 6px rgba(0,0,0,0.2);
+  width: 220px;
+  position: relative;
+}
+
+.polaroid-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  background: #c9a090; /* placeholder kalau foto belum ada */
+}
+
+/* Placeholder saat belum ada foto */
+.polaroid-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #c9a090 0%, #a07060 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: rgba(255,255,255,0.6);
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: #5a3a3a;
+  letter-spacing: 0.02em;
+}
+
+/* Ribbon bow di atas polaroid */
+.ribbon {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  animation: ribbonWiggle 3s ease-in-out infinite;
+}
+
+@keyframes ribbonWiggle {
+  0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+  50%       { transform: translateX(-50%) rotate(5deg); }
+}
+
+/* ============================================
+   PIN PAD SECTION
+   ============================================ */
+.pin-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 1;
+  animation: pinSectionIn 0.7s var(--ease-bounce) both;
+  animation-delay: 0.25s;
+}
+
+@keyframes pinSectionIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pin-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+/* 4 dot indicators */
+.pin-display {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+}
+
+.pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: transparent;
+  transition: all 0.2s var(--ease-bounce);
+}
+
+.pin-dot.filled {
+  background: var(--white);
+  border-color: var(--white);
+  transform: scale(1.15);
+}
+
+.pin-dot.error {
+  border-color: #ff6b6b;
+  background: #ff6b6b;
+}
+
+/* Keypad grid */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 200px;
+}
+
+.key-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  transition:
+    background  0.15s ease,
+    transform   0.1s var(--ease-bounce),
+    border-color 0.15s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key-btn:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.45);
+}
+
+.key-btn:active {
+  transform: scale(0.9);
+  background: rgba(255,255,255,0.3);
+}
+
+/* Tombol delete — lebih kecil & transparan */
+.key-btn.delete {
+  font-size: 22px;
+  background: transparent;
+  border-color: transparent;
+  color: rgba(255,255,255,0.6);
+}
+
+.key-btn.delete:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Tombol kosong (spacer grid) */
+.key-btn.empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ============================================
+   ERROR MESSAGE
+   ============================================ */
+.pin-error {
+  font-size: 11px;
+  color: #ffaaaa;
+  letter-spacing: 0.05em;
+  height: 16px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pin-error.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   HINT (kecil di bawah)
+   ============================================ */
+.pin-hint {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* ============================================
+   RESPONSIVE — Mobile
+   ============================================ */
+@media (max-width: 600px) {
+  .lock-page {
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .polaroid {
+    width: 180px;
+  }
+
+  @keyframes polaroidFloat {
+    from { opacity: 0; transform: translateY(20px) rotate(-2deg); }
+    to   { opacity: 1; transform: translateY(0) rotate(-2deg); }
+  }
+}

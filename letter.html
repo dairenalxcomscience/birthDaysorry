@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surat untukmu 💌</title>
+  <script src="js/guard.js"></script>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/letter.css" />
+  <style>
+    /* Override body overflow untuk halaman ini (bisa scroll) */
+    html, body { overflow-y: auto; height: auto; }
+  </style>
+</head>
+<body>
+
+<!-- Tombol kembali -->
+<a class="back-btn" href="wish.html" onclick="sessionStorage.setItem('bdw_unlocked','1')">← Kembali</a>
+
+<main class="letter-page">
+  <div class="letter-card">
+
+    <!-- Garis merah surat -->
+    <div class="letter-redline"></div>
+
+    <!-- ✏️ SEMUA TEKS DI BAWAH INI HARUS DIGANTI -->
+
+    <p class="letter-date">14 June 2026</p>
+
+    <p class="letter-salutation">My Dear Bianca,</p>
+
+    <div class="letter-body">
+      <p>
+        Hari ini, tepat di hari ulang tahunmu, aku ingin kamu tahu betapa
+        berharganya kamu di hidupku. Bukan hanya karena kamu ada, tapi karena
+        kamu membuatku menjadi versi terbaik dari diriku sendiri.
+      </p>
+
+      <p>
+        Setahun ini penuh dengan kenangan yang tidak akan pernah aku lupakan.
+        Dari hal-hal kecil yang kita tertawakan bersama, sampai momen-momen
+        yang membuat kita semakin kuat. Semuanya terasa sempurna karena ada kamu.
+      </p>
+
+      <p>
+        Di hari ini, satu-satunya wishku adalah kebahagiaanmu. Semoga setiap
+        hari ke depan membawa lebih banyak senyum, lebih banyak canda, dan
+        lebih banyak hal indah yang layak kamu dapatkan.
+      </p>
+
+      <p>
+        Terima kasih sudah menjadi kamu. Terima kasih sudah ada.
+        Aku mencintaimu, kemarin, hari ini, dan selalu.
+      </p>
+    </div>
+    <div class="letter-photo-frame" data-caption="Happy Birthday, Beby">
+      <img src="assets/audioAssets/photos/01.jpeg" alt="foto" />
+      <!-- Kalau belum ada foto, hapus <img> di atas, placeholder otomatis muncul -->
+    </div>
+    <p class="letter-closing">Selalu milikmu,</p>
+
+    <!-- ✏️ Ganti nama pengirim -->
+    <p class="letter-signature">Nama Kamu 🌹</p>
+
+    <!-- ✏️ PS opsional, bisa dihapus -->
+    <p class="letter-ps">
+      P.S. — Semoga kamu suka website kecil ini. Dibuat dengan tangan
+      (dan banyak kopi) khusus untukmu. 🎂✨
+    </p>
+
+  </div>
+</main>
+
+</body>
+</html>

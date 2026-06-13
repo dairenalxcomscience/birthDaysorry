@@ -1,0 +1,307 @@
+/* ============================================
+   MAKE A WISH PAGE  —  wish.css
+   ============================================ */
+
+/* ============================================
+   BASE PAGE
+   ============================================ */
+.wish-page {
+  width: 100vw;
+  height: 100vh;
+  background: #111111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.8s ease;
+}
+
+.wish-page.lights-on {
+  background: var(--red-bg);
+}
+
+/* ============================================
+   TITLE "Make a Wish"
+   ============================================ */
+.wish-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(18px, 3vw, 26px);
+  color: rgba(255,255,255,0.0);  /* invisible saat gelap */
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+  transition: color 0.8s ease;
+  text-shadow: 0 0 20px rgba(232, 184, 75, 0);
+}
+
+.wish-page.lights-on .wish-title {
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(232, 184, 75, 0.4);
+}
+
+/* ============================================
+   PIXEL ART CAKE (CSS box-shadow)
+   Setiap pixel = 8px
+   ============================================ */
+.pixel-cake-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Unit pixel 8x8 */
+.pixel {
+  width: 8px;
+  height: 8px;
+  position: relative;
+}
+
+/* 
+  Cake digambar dengan box-shadow pada .pixel
+  Koordinat: (col * 8px, row * 8px) dari titik anchor
+
+  Layout cake (tiap kotak = 1 pixel 8px):
+  
+       . . F F F . .     ← api (flame)
+       . . C C C . .     ← lilin
+  . Y Y Y Y Y Y Y Y Y . ← layer 1 (krim)
+  . B B B B B B B B B . ← layer 1 (cake body)
+  B B B B B B B B B B B ← layer 2 (lebih lebar)
+  . . . . . . . . . . .
+*/
+
+.pixel-cake {
+  /* Anchor point di tengah */
+  position: relative;
+  --p: 8px;  /* ukuran satu pixel */
+}
+
+/* Semua pixel digambar via box-shadow pada elemen pseudo */
+.pixel-cake::before {
+  content: '';
+  display: block;
+  width: var(--p);
+  height: var(--p);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ─────────────────────────────────────────
+   Kita pakai wrapper dengan dimensi pas,
+   gambar pixel per pixel via JS canvas 
+   (lebih maintainable dari hardcode box-shadow panjang)
+   ───────────────────────────────────────── */
+
+#cakeCanvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* Scale up 4x biar kelihatan besar */
+  width: 176px;   /* 22px * 8 = 176 */
+  height: 168px;  /* 21px * 8 = 168 */
+}
+
+/* Glow api lilin */
+.candle-glow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,163,22,0.35) 0%, transparent 70%);
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: glowPulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: translateX(-50%) scale(1);    opacity: 0.8; }
+  50%       { transform: translateX(-50%) scale(1.3);  opacity: 1; }
+}
+
+.candle-glow.out {
+  opacity: 0;
+}
+
+/* ============================================
+   TOMBOL TIUP
+   ============================================ */
+.blow-btn {
+  margin-top: 40px;
+  padding: 12px 32px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color        0.2s ease,
+    border-color 0.2s ease,
+    transform    0.15s var(--ease-bounce);
+  animation: blinkIn 0.5s ease 1s both;
+}
+
+@keyframes blinkIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.blow-btn:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.6);
+  transform: scale(1.04);
+}
+
+.blow-btn:active {
+  transform: scale(0.97);
+}
+
+.blow-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================
+   MUSIK LABEL (kecil di pojok)
+   ============================================ */
+.music-pill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+  animation: blinkIn 0.5s ease 1.5s both;
+}
+
+.music-pill:hover {
+  background: rgba(255,255,255,0.18);
+  color: var(--white);
+}
+
+.music-icon {
+  font-size: 14px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.music-icon.paused {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   FIREWORK PARTICLES
+   ============================================ */
+.firework-particle {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 20;
+  animation: burst var(--dur, 1.2s) ease-out forwards;
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform:
+      translateX(var(--tx, 0px))
+      translateY(var(--ty, 0px))
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   WISH SENT MESSAGE (setelah tiup)
+   ============================================ */
+.wish-sent {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  background: var(--red-bg); /* ← tambah ini */
+}
+
+.wish-sent.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wish-sent-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--gold-light);
+  text-align: center;
+  animation: wishBounce 0.8s var(--ease-bounce) both;
+}
+
+.wish-sent-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+@keyframes wishBounce {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.wish-next-btn {
+  margin-top: 8px;
+  padding: 12px 28px;
+  background: var(--gold);
+  border: none;
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-bounce), opacity 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.wish-next-btn:hover {
+  transform: scale(1.05);
+}
