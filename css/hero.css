@@ -171,7 +171,7 @@
   
   /* --- TAMBAHKAN 2 BARIS INI --- */
   margin-top: 25px;         /* Menaikkan tombol dengan jarak ideal dari teks ucapan */
-  margin-bottom: 25px;      /* Jarak aman agar tidak hilang atau terpotong di layar HP */
+  margin-bottom: 30px;      /* Jarak aman agar tidak hilang atau terpotong di layar HP */
   /* ----------------------------- */
 
   transition:
