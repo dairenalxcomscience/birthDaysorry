@@ -12,50 +12,68 @@
 
 <main class="hero-page">
 
-  <!-- ======= BACKGROUND FOTO ======= -->
-  <div class="hero-bg">
-    <!--
-      ✏️ CARA PAKAI:
-      Hapus <div class="hero-bg-placeholder"> di bawah, ganti dengan:
-      <img src="assets/photos/couple.webp" alt="foto" />
-    -->
-    <div class="hero-bg-placeholder">💑</div>
-  </div>
-
-  <!-- Overlay gelap gradient bawah -->
+  <div class="hero-bg" id="heroBg1"></div>
+  <div class="hero-bg" id="heroBg2"></div>
   <div class="hero-overlay"></div>
 
-  <!-- Counter kecil di kanan atas (opsional) -->
-  <div class="hero-counter">
-    <!-- ✏️ Ganti dengan "14 · 06 · 03" atau tanggal anniversary -->
-    14 · 06 · 03
-  </div>
+  <div class="hero-counter">14 · 06 · 03</div>
 
-  <!-- ======= KONTEN UTAMA ======= -->
   <div class="hero-content">
-
-    <!-- ✏️ Ganti eyebrow text -->
     <p class="hero-eyebrow">✦ For you, always ✦</p>
-
-    <!-- ✏️ Ganti nama -->
     <h1 class="hero-title">
       Happy Birthday<br /><em>Baby!</em>
     </h1>
-
-    <!-- ✏️ Ganti subtitle -->
     <p class="hero-subtitle">
-      I hope this little gift will make you happy.<br />
-      This gift is like our love — thoughtful, unique,<br />
-      and made just for you.
+      Ini memang gak seberapa :D <br />
+      Tapi semoga ini bisa boost sdiki tu mood,<br />
     </p>
-
-    <!-- Tombol ke halaman surat -->
     <a class="hero-cta" href="wish.html" onclick="sessionStorage.setItem('bdw_unlocked','1')">BACA Yah →</a>
-    
-
   </div>
 
 </main>
+
+<script>
+const PHOTOS = [
+  'assets/audioAssets/photos/01.jpeg',
+  'assets/audioAssets/photos/02.jpeg',
+  'assets/audioAssets/photos/03.jpeg',
+  'assets/audioAssets/photos/04.jpeg',
+  'assets/audioAssets/photos/05.jpeg',
+  'assets/audioAssets/photos/06.jpeg',
+  'assets/audioAssets/photos/07.jpeg',
+  'assets/audioAssets/photos/08.jpeg',
+  'assets/audioAssets/photos/09.jpeg',
+  'assets/audioAssets/photos/10.jpeg'
+]
+
+const bg1 = document.getElementById('heroBg1')
+const bg2 = document.getElementById('heroBg2')
+
+let current = 0
+let active = bg1
+let inactive = bg2
+
+bg1.style.backgroundImage = `url('${PHOTOS[0]}')`
+bg1.classList.add('active')
+
+setInterval(() => {
+
+  current = (current + 1) % PHOTOS.length
+
+  inactive.style.backgroundImage =
+    `url('${PHOTOS[current]}')`
+
+  requestAnimationFrame(() => {
+    inactive.classList.add('active')
+    active.classList.remove('active')
+
+    const temp = active
+    active = inactive
+    inactive = temp
+  })
+
+}, 5000)
+</script>
 
 </body>
 </html>
